@@ -1,7 +1,7 @@
 class Eviapi
   require 'faraday'
   require 'json'
-  attr_accessor :username, :password, :hash, :server_url, :port, :session, :api_base
+  attr_accessor :username, :password, :hash, :server_url, :port, :request, :api_base, :security_token
   attr_reader :setup_session_params
 
   # Class methods
@@ -40,23 +40,31 @@ class Eviapi
   end
 
   def session_authenticate
-    @session = @connection.get '/mw/Session.Authenticate', { :username => @username, :password => @password }
-    results  = JSON.parse @session.body
+    @request = @connection.get '/mw/Session.Authenticate', { :username => @username, :password => @password }
+    results  = JSON.parse @request.body
 
     raise "Could not authenticate session" unless results['valid'] == true
   end
 
   def session_destroy
-    @session = @connection.get '/mw/Session.Destroy'
-    results  = JSON.parse @session.body
+    @request = @connection.get '/mw/Session.Destroy'
+    results  = JSON.parse @request.body
 
     raise "Could not destroy session" unless results['valid'] == true
   end
 
   def session_noop
+    @request = @connection.get '/mw/Session.Noop'
+    results = JSON.parse @request.body
+
+    raise "Session Noop failed" unless results['valid'] == true
   end
 
   def session_security_token_create
+    @request = @connection.get '/mw/Session.SecurityToken.Create'
+    results = JSON.parse @request.body
+
+    @security_token = results['data']['Token']
   end
 
   def session_setup
@@ -65,8 +73,8 @@ class Eviapi
       f.response  :logger
       f.adapter   Faraday.default_adapter
     end
-    @session = @connection.get '/mw/Session.Setup', @setup_session_params
-    results  = JSON.parse @session.body
+    @request = @connection.get '/mw/Session.Setup', @setup_session_params
+    results  = JSON.parse @request.body
 
     raise "Could not setup session" unless results['valid'] == true
   end
