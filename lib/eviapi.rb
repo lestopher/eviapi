@@ -1,6 +1,6 @@
 class Eviapi
   require 'faraday'
-
+  require 'json'
   attr_accessor :username, :password, :hash, :server_url, :port, :session, :api_base
   attr_reader :setup_session_params
 
@@ -40,10 +40,17 @@ class Eviapi
   end
 
   def session_authenticate
+    @session = @connection.get '/mw/Session.Authenticate', { :username => @username, :password => @password }
+    results  = JSON.parse @session.body
 
+    raise "Could not authenticate session" unless results['valid'] == true
   end
 
   def session_destroy
+    @session = @connection.get '/mw/Session.Destroy'
+    results  = JSON.parse @session.body
+
+    raise "Could not destroy session" unless results['valid'] == true
   end
 
   def session_noop
@@ -53,14 +60,15 @@ class Eviapi
   end
 
   def session_setup
-    connection = Faraday.new :url => @server_url, :ssl => { :verify => false } 
-    @session = connection.post do |request|
-      request.url '/mw/Session.Setup'
-      request.headers['Content-Type'] = 'application/json'
-      request.body = '{ "Version": "4.0", "JSONData": { "Mapplets": [{ "Guid": ""052A35E-DC3B-4283-B732-7BEE3B095C5E"", "Version": "4.0"}]}}'
+    @connection = Faraday.new :url => @server_url, :ssl => { :verify => false }  do |f|
+      f.request   :url_encoded
+      f.response  :logger
+      f.adapter   Faraday.default_adapter
     end
+    @session = @connection.get '/mw/Session.Setup', @setup_session_params
+    results  = JSON.parse @session.body
 
-    puts @session
+    raise "Could not setup session" unless results['valid'] == true
   end
 
   def session_verify
