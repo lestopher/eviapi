@@ -31,8 +31,8 @@ class Eviapi
         :Mapplets => 
         [
           {
-            :Guid => "052A35E-DC3B-4283-B732-7BEE3B095C5E",
-            :Version => "4.0"
+            :Guid => "B052A35E-DC3B-4283-B732-7BEE3B095C5E",
+            :Version => "5.0"
           }
         ]
       }
@@ -80,5 +80,7 @@ class Eviapi
   end
 
   def session_verify
+    @request = @connection.get '/mw/Session.Verify'
+    results = JSON.parse @request.body
   end
 end
