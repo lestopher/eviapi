@@ -14,6 +14,15 @@ Todo
 + Implement all functions available
 + Create unit tests for each method
 
+Build and Install
+===========
+In main folder type  
+
+    # This generates something like eviapi-X.X.X.gem
+    gem build eviapi.gemspec
+    # Install the gem
+    gem install eviapi-X.X.X.gem
+
 How To Use
 =========
 In IRB:  

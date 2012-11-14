@@ -39,30 +39,60 @@ class Eviapi
     }
   end
 
+  def audit_add
+    @request = @connection.get '/mw/Audit.Add'
+    return JSON.parse @request.body
+  end
+
+  def connection_close(connection)
+    @request = @connection.post '/mw/Connection.Close', { :name => connection }
+    return JSON.parse @request.body
+  end
+
+  def server_properties_get
+    @request = @connection.get '/mw/Server.Properties.Get'
+    return JSON.parse @request.body
+  end
+
+  def server_properties_set
+    @request = @connection.get '/mw/Server.Properties.Set'
+    return JSON.parse @request.body
+  end
+
+  def server_variable_get
+    @request = @connection.get '/mw/Server.Variable.Get'
+    return JSON.parse @request.body
+  end
+  
+  def server_variable_list
+    @request = @connection.get '/mw/Server.Variable.List'
+    return JSON.parse @request.body
+  end
+  
   def session_authenticate
     @request = @connection.get '/mw/Session.Authenticate', { :username => @username, :password => @password }
-    results  = JSON.parse @request.body
+    return JSON.parse @request.body
 
     raise "Could not authenticate session" unless results['valid'] == true
   end
 
   def session_destroy
     @request = @connection.get '/mw/Session.Destroy'
-    results  = JSON.parse @request.body
+    return JSON.parse @request.body
 
     raise "Could not destroy session" unless results['valid'] == true
   end
 
   def session_noop
     @request = @connection.get '/mw/Session.Noop'
-    results = JSON.parse @request.body
+    return JSON.parse @request.body
 
     raise "Session Noop failed" unless results['valid'] == true
   end
 
   def session_security_token_create
     @request = @connection.get '/mw/Session.SecurityToken.Create'
-    results = JSON.parse @request.body
+    return JSON.parse @request.body
 
     @security_token = results['data']['Token']
   end
@@ -74,13 +104,13 @@ class Eviapi
       f.adapter   Faraday.default_adapter
     end
     @request = @connection.get '/mw/Session.Setup', @setup_session_params
-    results  = JSON.parse @request.body
+    return JSON.parse @request.body
 
     raise "Could not setup session" unless results['valid'] == true
   end
 
   def session_verify
     @request = @connection.get '/mw/Session.Verify'
-    results = JSON.parse @request.body
+    return JSON.parse @request.body
   end
 end
