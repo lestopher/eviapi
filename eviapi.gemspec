@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name         = 'eviapi'
-  s.version      = '0.0.1'
-  s.date         = '2012-11-13'
+  s.version      = '0.1.0'
+  s.date         = '2012-11-15'
   s.summary      = 'Hook into Evisions API'
   s.description  = 'A gem to easily access Evisions\'s API'
   s.authors      = ["Christopher Nguyen"]
