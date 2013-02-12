@@ -172,13 +172,13 @@ class Eviapi
   end
 
   def session_setup
-    # headers = {
-    #  'Accept' => 'application/json, text/javascript, */*; q=0.01',
-    #  'Accept-Charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-    #  'Accept-Encoding' => 'gzip,deflate,sdch',
-    #  'Accept-Language' => 'en-US,en;q=0.8',
-    #  'Connection' => 'keep-alive'
-    # }
+    headers = {
+     'Accept' => 'application/json, text/javascript, */*; q=0.01',
+     'Accept-Charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+     'Accept-Encoding' => 'gzip,deflate,sdch',
+     'Accept-Language' => 'en-US,en;q=0.8',
+     'Connection' => 'close'
+    }
 
     @connection = Faraday::Connection.new :url => @server_url, :ssl => { :verify => false } do |f|
       f.request   :url_encoded
@@ -186,9 +186,16 @@ class Eviapi
       f.adapter   Faraday.default_adapter
     end
 
+    @connection.headers = headers
+
+    # Make the call
     @request = @connection.post '/mw/Session.Setup', {:Version => @setup_session_params[:Version], :JSONData => JSON.generate(@setup_session_params[:JSONData])}
+
+    # Setup variables based on response
     @sessionid = JSON.parse(@request.body)['data']['SessionId']
     @connection.params['SessionId'] = @sessionid
+    @connection.headers['Cookie']   = @request['set-cookie'].split[0].chop
+
     return JSON.parse @request.body
 
     raise "Could not setup session" unless results['valid'] == true
@@ -201,6 +208,7 @@ class Eviapi
     if results['valid'] == true
       return JSON.parse @request.body
     else
+      p @request
       raise 'Could not verify session'
     end
   end
