@@ -28,7 +28,7 @@ module Eviapi
     DEFAULT_CLIENT_USERNAME = nil
     DEFAULT_CLIENT_PASSWORD = nil
     
-    DEFAULT_SESSIONID       = nil
+    DEFAULT_SESSION_ID      = nil
     
     DEFAULT_ENDPOINT        = 'https://evidevjs1.evisions.com/'
     DEFAULT_PORT            = 443
@@ -65,7 +65,7 @@ module Eviapi
       self.adapter         = DEFAULT_ADAPTER
       self.client_password = DEFAULT_CLIENT_PASSWORD
       self.client_username = DEFAULT_CLIENT_USERNAME
-      self.session_id      = DEFAULT_ACCESS_TOKEN
+      self.session_id      = DEFAULT_SESSION_ID
       self.endpoint        = DEFAULT_ENDPOINT
       self.format          = DEFAULT_FORMAT
       self.user_agent      = DEFAULT_USER_AGENT

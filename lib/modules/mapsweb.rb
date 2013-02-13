@@ -117,6 +117,20 @@ module Mapsweb
   end
 
   def session_setup
+    setup_session_params = 
+    {
+      :Version => "4.2", 
+      :JSONData => 
+      {
+        :Mapplets => 
+        [
+          {
+            :Guid => "B052A35E-DC3B-4283-B732-7BEE3B095C5E",
+            :Version => "4.2"
+          }
+        ]
+      }
+    }
  
     # Make the call
     @request = @connection.post '/mw/Session.Setup', {:Version => @setup_session_params[:Version], :JSONData => JSON.generate(@setup_session_params[:JSONData])}
