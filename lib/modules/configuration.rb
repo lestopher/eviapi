@@ -12,7 +12,9 @@ module Eviapi
       :endpoint,
       :port,
       :format,
-      :user_agent
+      :user_agent,
+      :application,
+      :cookie
     ].freeze
 
     VALID_FORMATS =
@@ -52,9 +54,10 @@ module Eviapi
     #
     # @note JSON is the only available format at this time
     DEFAULT_FORMAT          = :json
-    
     DEFAULT_USER_AGENT      = "Evisions Eviapi Ruby Gem #{Eviapi::VERSION}"
+    DEFAULT_APPLICATION     = "ArgosWeb"
 
+    DEFAULT_COOKIE          = nil
     # private vars
     attr_accessor *VALID_OPTIONS_KEYS
 
@@ -84,6 +87,8 @@ module Eviapi
       self.endpoint        = DEFAULT_ENDPOINT
       self.format          = DEFAULT_FORMAT
       self.user_agent      = DEFAULT_USER_AGENT
+      self.application     = DEFAULT_APPLICATION
+      self.cookie          = DEFAULT_COOKIE
     end
   end
 end

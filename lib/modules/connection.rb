@@ -9,7 +9,7 @@ module Eviapi
       options = {
         :headers => { 'Accept' => "application/#{format}; charset=utf-8", 'User-Agent' => user_agent },
         :proxy   => nil,
-        :port    => port
+        :port    => port,
         :ssl     => { :verify => false },
         :url     => endpoint
       }
