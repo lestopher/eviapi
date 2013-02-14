@@ -6,8 +6,9 @@ Gem::Specification.new do |s|
   s.description  = 'A gem to easily access Evisions\'s API'
   s.authors      = ["Christopher Nguyen"]
   s.email        = "christopher.nguyen@evisions.com"
-  s.files        = ["lib/eviapi.rb"]
-  s.homepage     = 'http://github.com/chr1sst0pher/eviapi.git'
+  s.files        = Dir["lib/**/*.rb"]
+  s.homepage     = 'http://github.com/lestopher/eviapi.git'
   s.add_dependency 'json'
   s.add_dependency 'faraday'
+  s.add_dependency 'faraday_middleware'
 end
