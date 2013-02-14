@@ -1,9 +1,11 @@
 task :build do
+ sh 'gem build eviapi.gemspec' 
+end
+
+task :clean do
   Dir.glob("*\.gem") do |e|
     File.delete e
   end
-
- sh 'gem build eviapi.gemspec' 
 end
 
 task :install do
@@ -11,4 +13,4 @@ task :install do
   sh "gem install #{gem_name}"
 end
 
-task :default => [:build, :install]
+task :default => [:clean, :build, :install]
