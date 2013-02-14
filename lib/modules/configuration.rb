@@ -20,6 +20,21 @@ module Eviapi
       :json
     ].freeze
 
+    SETUP_SESSION_PARAMS = 
+    {
+      :Version => "4.2", 
+      :JSONData => 
+      {
+        :Mapplets => 
+        [
+          {
+            :Guid => "B052A35E-DC3B-4283-B732-7BEE3B095C5E",
+            :Version => "4.2"
+          }
+        ]
+      }
+    }.freeze
+
     # Adapter to be used if none is set
     #
     # @note The default faraday adapter is Net::HTTP.
@@ -38,7 +53,7 @@ module Eviapi
     # @note JSON is the only available format at this time
     DEFAULT_FORMAT          = :json
     
-    DEFAULT_USER_AGENT      = "Evisions Eviapi Ruvy Gem #{}"
+    DEFAULT_USER_AGENT      = "Evisions Eviapi Ruby Gem #{Eviapi::VERSION}"
 
     # private vars
     attr_accessor *VALID_OPTIONS_KEYS
