@@ -14,12 +14,11 @@ module Eviapi
         #
         # input.Name          String
         # input.JSONData      String
-        def send(input={}, raw=false)
+        def email_send(input={}, raw=false)
           response = post('mw/Email.List', input, raw)
         end
 
         alias_method :email_list, :list
-        alias_method :email_send, :send
       end
     end
   end
