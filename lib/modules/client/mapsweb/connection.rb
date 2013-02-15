@@ -23,6 +23,10 @@ module Eviapi
         def connection_open(input={}, raw=false)
           response = post('/mw/Connection.Open', input, raw)
         end
+
+        alias_method :conn_close, :connection_close
+        alias_method :conn_list, :connection_list
+        alias_method :conn_open, :connection_open
       end
     end
   end
