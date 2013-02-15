@@ -6,7 +6,7 @@ module Eviapi
         #
         # input.Guid               String
         # input.Path               String
-        def loo_data_get(input)
+        def loo_data_get(input={}, raw=false)
           response = get('mw/Argos/LOO.Data.Get', input, raw)
         end
 
@@ -14,7 +14,7 @@ module Eviapi
         #
         # input.Guid               String
         # input.Path               String
-        def loo_list(input)
+        def loo_list(input={}, raw=false)
           response = get('mw/Argos/LOO.List', input, raw)
         end
       end
