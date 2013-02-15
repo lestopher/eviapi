@@ -14,8 +14,14 @@ module Eviapi
           response = get('mw/Server.Variable.Get', input, raw)
         end
 
+        # Lists the server-supported system variables
+        def variable_list(input={}, raw=false)
+          response = get('mw/Server.Variable.List', input, raw)
+        end
+
         alias_method :server_properties_get, :properties_get
         alias_method :server_variable_get, :variable_get
+        alias_method :server_variable_list, :variable_list
 
       end
     end
