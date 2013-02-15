@@ -11,5 +11,6 @@ module Eviapi
     include Eviapi::Client::Mapsweb::Password
     include Eviapi::Client::Mapsweb::Portal
     include Eviapi::Client::Mapsweb::Session
+    include Eviapi::Client::Mapsweb::Server
   end
 end
