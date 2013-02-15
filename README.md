@@ -18,22 +18,33 @@ Build and Install
 ===========
 In main folder type  
 
-    # This generates something like eviapi-X.X.X.gem
-    gem build eviapi.gemspec
-    # Install the gem
-    gem install eviapi-X.X.X.gem
+    rake
 
 How To Use
 =========
 In IRB:  
 
     require 'eviapi'
-    # The empty string is for hash.  Will raise error if username/pass is missing
-    session = Eviapi.new 'administrator', 'ev1si0ns', '', 'https://evidevjs1.evisions.com', '443'
-    # Tell the MAP Server what you expect and it will respond
-    session.session_setup 
+
+    Eviapi.configure do |e|
+        e.client_username = 'administrator'
+        e.client_password = 'password'
+        e.endpoint        = 'https://evidevjs1.evisions.com/'
+        e.port            = 443
+    end
+
+    user = Eviapi.client
+
+    # If you'd rather set the above after it's been instantiated...
+    # user.client_username = 'administrator'
+    # user.client_password = 'password'
+
+    # Equivalent of session.setup
+    user.setup
+
     # Authenticate your username/pass
-    session.session_authenticate
+    user.authenticate
+
     # Call whatever you like here
     [...]
-    session.session_destroy # destroy session, duh
+    user.destroy # destroy session, duh
