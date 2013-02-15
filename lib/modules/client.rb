@@ -14,5 +14,7 @@ module Eviapi
     include Eviapi::Client::Mapsweb::Session
     include Eviapi::Client::Mapsweb::Sql
     include Eviapi::Client::Mapsweb::User
+
+    include Eviapi::Client::Argosweb::DataBlock
   end
 end
