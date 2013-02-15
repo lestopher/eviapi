@@ -29,21 +29,21 @@ module Eviapi
         end
 
         # When a client wants to log out it will destroy its session.
-        def destroy(raw=false)
-          response = get('mw/Session.Destroy')
+        def destroy(input={}, raw=false)
+          response = get('mw/Session.Destroy', input, raw)
         end
 
         # Used as a keep-alive technique.  The client sends this message to inform the
         # server that it still exists and to prevent the session from being destroyed.
-        def noop(raw=false)
-          response = get('mw/Session.Noop')
+        def noop(input={}, raw=false)
+          response = get('mw/Session.Noop', input, raw)
         end
 
         # Create a single-use security token.
         #
         # input.SessionId   String
         def security_token_create(input={}, raw=false)
-          response = get('mw/Session.SecurityToken.Create', input)
+          response = get('mw/Session.SecurityToken.Create', input, raw)
         end
 
         # One of the first functions any client should call.  This function tells 
@@ -71,7 +71,7 @@ module Eviapi
         # input.Application   String optional
         def verify(input={}, raw=false)
           input = { :Application => 'ArgosWeb' } if input.empty?
-          response = get('mw/Session.Verify', input)
+          response = get('mw/Session.Verify', input, raw)
         end
       end
     end

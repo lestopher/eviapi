@@ -7,7 +7,7 @@ module Eviapi
       # input.Level   String  Can be Error || Information || Warning
       # input.String  String
       def add(input={}, raw=false)
-        response = post('mw/Audit.Add', input)
+        response = post('mw/Audit.Add', input, raw)
       end
     end
   end

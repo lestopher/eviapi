@@ -3,6 +3,7 @@ module Eviapi
     Dir[File.expand_path('../client/**/*.rb', __FILE__)].each{ |f| require f }
 
     include Eviapi::Client::Mapsweb::Audit
+    include Eviapi::Client::Mapsweb::Connection
     include Eviapi::Client::Mapsweb::Session
   end
 end
