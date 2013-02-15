@@ -6,7 +6,7 @@ module Eviapi
         #
         # input.All           Boolean optional
         # input.Application   String
-        def list(input={}, raw=false)
+        def email_list(input={}, raw=false)
           response = get('mw/Email.List', input, raw)
         end
 
@@ -17,8 +17,6 @@ module Eviapi
         def email_send(input={}, raw=false)
           response = post('mw/Email.List', input, raw)
         end
-
-        alias_method :email_list, :list
       end
     end
   end

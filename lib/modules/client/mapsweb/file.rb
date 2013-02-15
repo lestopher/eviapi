@@ -10,11 +10,9 @@ module Eviapi
         #
         # input.Path            String
         # input.ContentPath     String optional
-        def get(input={}, raw=false)
+        def file_get(input={}, raw=false)
           response = post('mw/File.Get', input, raw)
         end
-
-        alias_method :file_get, :get
       end
     end
   end

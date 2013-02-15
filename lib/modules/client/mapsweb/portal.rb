@@ -8,13 +8,13 @@ module Eviapi
         # institution has a valid license for and 
         # "OnlyShowUserAccessibleApplications", which only returns
         # applications the user has access to.
-        def application_list(input={}, raw=false)
+        def portal_application_list(input={}, raw=false)
           response = get('mw/Portal.Application.List', input, raw)
         end
 
         # Returns a list of widget classes (in alphabetical order) that are
         # set to enabled by the administrator in config tool.
-        def widget_enabled(input={}, raw=false)
+        def portal_widget_enabled(input={}, raw=false)
           response = get('mw/Portal.Widget.Enabled')
         end
 
@@ -23,13 +23,13 @@ module Eviapi
         # name in the list determines the position of the pinned widget in
         # the config tool, starting from the left most class name as
         # position number 1.
-        def widget_pinned(input={}, raw=false)
+        def portal_widget_pinned(input={}, raw=false)
           response = get('mw/Portal.Widget.Pinned',input, raw)
         end
 
-        alias_method :portal_application_list, :application_list
-        alias_method :portal_widget_enabled, :widget_enabled
-        alias_method :portal_widget_pinned, :widget_pinned
+        alias_method :port_a_l, :portal_application_list
+        alias_method :port_w_e, :portal_widget_enabled
+        alias_method :port_w_p, :portal_widget_pinned
       end
     end
   end

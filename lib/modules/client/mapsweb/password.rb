@@ -3,19 +3,19 @@ module Eviapi
     module Mapsweb
       module Password
         # Clients can request a list of abilities of the authenticated user.
-        def abilities_get(input={}, raw=false)
+        def password_abilities_get(input={}, raw=false)
           response = get('mw/Password.Abilities.Get', input, raw)
         end
 
         # Clients can generate a random password adhering to the rules
         # defined by the MAPS Administrator
-        def random(input={}, raw=false)
+        def password_random(input={}, raw=false)
           response = post('mw/Password.Random', input, raw)
         end
 
         # Clients can request a list of rules (defined by the MAPS
         # Administrator) that a valid password must adhere to.
-        def rules(input={}, raw=false)
+        def password_rules(input={}, raw=false)
           response = get('mw/Password.Rules', input, raw)
         end
 
@@ -26,7 +26,7 @@ module Eviapi
         #
         # input.OldValue        String
         # input.NewValue        String
-        def set(input={}, raw=false)
+        def password_set(input={}, raw=false)
           response = post('mw/Password.Set', input, raw)
         end
 
@@ -35,14 +35,14 @@ module Eviapi
         # be controlled by MAPS.
         #
         # input.Password        String
-        def test(input={}, raw=false)
+        def password_test(input={}, raw=false)
           response = post('mw/Password.Test', input, raw)
         end
         
-        alias_method :password_abilities_get, :abilities_get
-        alias_method :password_random, :random
-        alias_method :password_rules, :rules
-        alias_method :password_set, :set
+        alias_method :pass_a_g, :password_abilities_get
+        alias_method :pass_rand, :password_random
+        alias_method :pass_rules, :password_rules
+        alias_method :pass_s, :password_set
       end
     end
   end

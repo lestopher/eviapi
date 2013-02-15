@@ -6,7 +6,7 @@ module Eviapi
         # in a specified SQL statement.
         #
         # input.SQL     String
-        def examine(input={}, raw=false)
+        def sql_examine(input={}, raw=false)
           response = get('mw/Sql.Examine', input, raw)
         end
 
@@ -21,12 +21,12 @@ module Eviapi
         # input.Product             String
         # input.UniqueId            String
         # input.JSONData            String
-        def quickopen(input={}, raw=false)
+        def sql_quickopen(input={}, raw=false)
           response = post('mw/Sql.QuickOpen', input, raw)
         end
 
-        alias_method :sql_examine, :examine
-        alias_method :sql_quickopen, :quickopen
+        alias_method :examine, :sql_examine
+        alias_method :quickopen, :sql_quickopen
       end
     end
   end

@@ -5,17 +5,17 @@ module Eviapi
         # This function returns the value of one or more user settings.
         #
         # input.Properties        String      Comma delimited list
-        def settings_get(input={}, raw=false)
+        def user_settings_get(input={}, raw=false)
           response = get('mw/User.Settings.Get', input, raw)
         end
 
         # This function sets the value of one or more user settings.
-        def settings_set(input={}, raw=false)
+        def user_settings_set(input={}, raw=false)
           response = post('mw/User.Settings.Set', input, raw)
         end
 
-        alias_method :user_settings_get, :settings_get
-        alias_method :user_settings_set, :settings_set
+        alias_method :user_s_g, :user_settings_get
+        alias_method :user_s_s, :user_settings_set
       end
     end
   end

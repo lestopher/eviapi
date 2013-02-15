@@ -6,11 +6,11 @@ module Eviapi
         #
         # input.Status      String    Can be: Debug || Error || Information || Trace || Warning
         # input.Message     String
-        def add(input={}, raw=false)
+        def log_add(input={}, raw=false)
           response = post('mw/Log.Add', input, raw)
         end
 
-        alias_method :log_add, :add
+        alias_method :l_a, :log_add
       end
     end
   end
