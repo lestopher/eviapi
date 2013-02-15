@@ -37,7 +37,7 @@ module Eviapi
         # input.Id                 Integer
         # input.Path               String
         def datablock_security_list(input={}, raw=false)
-          response = get('mw/Argos/DataBlock.Security.List')
+          response = get('mw/Argos/DataBlock.Security.List', input, raw)
         end
 
         alias_method :db_data_get, :datablock_data_get

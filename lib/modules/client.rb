@@ -16,5 +16,11 @@ module Eviapi
     include Eviapi::Client::Mapsweb::User
 
     include Eviapi::Client::Argosweb::DataBlock
+    include Eviapi::Client::Argosweb::Expression
+    include Eviapi::Client::Argosweb::Folder
+    include Eviapi::Client::Argosweb::LibraryOfObjects
+    include Eviapi::Client::Argosweb::Olap
+    include Eviapi::Client::Argosweb::Report
+    include Eviapi::Client::Argosweb::Shortcut
   end
 end
