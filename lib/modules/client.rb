@@ -9,6 +9,7 @@ module Eviapi
     include Eviapi::Client::Mapsweb::Log
     include Eviapi::Client::Mapsweb::Mapplet
     include Eviapi::Client::Mapsweb::Password
+    include Eviapi::Client::Mapsweb::Portal
     include Eviapi::Client::Mapsweb::Session
   end
 end
