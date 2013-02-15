@@ -5,6 +5,7 @@ module Eviapi
     include Eviapi::Client::Mapsweb::Audit
     include Eviapi::Client::Mapsweb::Connection
     include Eviapi::Client::Mapsweb::Email
+    include Eviapi::Client::Mapsweb::File
     include Eviapi::Client::Mapsweb::Session
   end
 end
