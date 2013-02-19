@@ -14,7 +14,7 @@ module Eviapi
         #
         # Note: Either password or token is used but not both
 
-        def server_authenticate(input={}, raw=false)
+        def session_authenticate(input={}, raw=false)
           # Note that we're always going to override username, password and application
           # if you don't like it, feel free to change it
           options  = {
@@ -29,20 +29,20 @@ module Eviapi
         end
 
         # When a client wants to log out it will destroy its session.
-        def server_destroy(input={}, raw=false)
+        def session_destroy(input={}, raw=false)
           response = get('mw/Session.Destroy', input, raw)
         end
 
         # Used as a keep-alive technique.  The client sends this message to inform the
         # server that it still exists and to prevent the session from being destroyed.
-        def server_noop(input={}, raw=false)
+        def session_noop(input={}, raw=false)
           response = get('mw/Session.Noop', input, raw)
         end
 
         # Create a single-use security token.
         #
         # input.SessionId   String
-        def server_security_token_create(input={}, raw=false)
+        def session_security_token_create(input={}, raw=false)
           response = get('mw/Session.SecurityToken.Create', input, raw)
         end
 
@@ -53,7 +53,7 @@ module Eviapi
         #
         # input.Version   String
         # input.JSONData  String
-        def server_setup(input={}, raw=true)
+        def session_setup(input={}, raw=true)
           options = Eviapi::Configuration::SETUP_SESSION_PARAMS.to_json
 
           # Override if nothing is passed to it
@@ -69,17 +69,17 @@ module Eviapi
         # changing any authentication.
         #
         # input.Application   String optional
-        def server_verify(input={}, raw=false)
+        def session_verify(input={}, raw=false)
           input = { :Application => 'ArgosWeb' } if input.empty?
           response = get('mw/Session.Verify', input, raw)
         end
 
-        alias_method :auth, :server_authenticate
-        alias_method :destroy, :server_destroy
-        alias_method :noop, :server_noop
-        alias_method :token, :server_security_token_create
-        alias_method :setup, :server_setup
-        alias_method :verify, :server_verify
+        alias_method :auth, :session_authenticate
+        alias_method :destroy, :session_destroy
+        alias_method :noop, :session_noop
+        alias_method :token, :session_security_token_create
+        alias_method :setup, :session_setup
+        alias_method :verify, :session_verify
       end
     end
   end
