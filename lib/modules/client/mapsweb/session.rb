@@ -15,15 +15,13 @@ module Eviapi
         # Note: Either password or token is used but not both
 
         def session_authenticate(input={}, raw=false)
-          # Note that we're always going to override username, password and application
-          # if you don't like it, feel free to change it
           options  = {
             :username => self.client_username,
             :password => self.client_password,
             :application => self.application
           }
 
-          input.merge!(options)
+          input = options if input.empty?
 
           response = post('mw/Session.Authenticate', input, raw, false)
         end
@@ -42,7 +40,7 @@ module Eviapi
         # Create a single-use security token.
         #
         # input.SessionId   String
-        def session_security_token_create(input={}, raw=false)
+        def session_securitytoken_create(input={}, raw=false)
           response = get('mw/Session.SecurityToken.Create', input, raw)
         end
 
@@ -53,15 +51,13 @@ module Eviapi
         #
         # input.Version   String
         # input.JSONData  String
-        def session_setup(input={}, raw=true)
+        def session_setup(input={}, raw=false)
           options = Eviapi::Configuration::SETUP_SESSION_PARAMS.to_json
 
           # Override if nothing is passed to it
           input   = options if input.empty?
 
           response    = post("mw/Session.Setup", input, raw)
-          self.cookie = response.env[:response_headers][:set_cookie].split[0].chop if response.env[:response_headers][:set_cookie] != nil
-          raw ? response : response.body
         end
 
         # This function allows a client to verify its authentication data.  It
@@ -77,7 +73,7 @@ module Eviapi
         alias_method :auth, :session_authenticate
         alias_method :destroy, :session_destroy
         alias_method :noop, :session_noop
-        alias_method :token, :session_security_token_create
+        alias_method :token, :session_securitytoken_create
         alias_method :setup, :session_setup
         alias_method :verify, :session_verify
       end

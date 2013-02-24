@@ -35,6 +35,12 @@ module Eviapi
           request.body = options unless options.empty?
         end
       end
+
+      # Setup the cookie if it's returned in the header
+      if response.env[:response_headers][:set_cookie] != nil
+        self.cookie = response.env[:response_headers][:set_cookie]
+      end
+
       raw ? response : response.body
     end
 
