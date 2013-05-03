@@ -23,7 +23,7 @@ module Eviapi
 
           input = options if input.empty?
 
-          response = post('mw/Session.Authenticate', input, raw, false)
+          response = post('mw/Session.Authenticate', input, raw)
         end
 
         # When a client wants to log out it will destroy its session.
@@ -52,10 +52,16 @@ module Eviapi
         # input.Version   String
         # input.JSONData  String
         def session_setup(input={}, raw=false)
-          options = Eviapi::Configuration::SETUP_SESSION_PARAMS.to_json
+          # options = Eviapi::Configuration::SETUP_SESSION_PARAMS.to_json
+          options = Eviapi::Configuration::SETUP_SESSION_PARAMS
 
           # Override if nothing is passed to it
-          input   = options if input.empty?
+          if input.empty?
+            input = {
+              :Version    => options[:Version],
+              :JSONData => options[:JSONData].to_json
+            } 
+          end
 
           response    = post("mw/Session.Setup", input, raw)
         end
