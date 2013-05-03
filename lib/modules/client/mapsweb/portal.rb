@@ -15,7 +15,7 @@ module Eviapi
         # Returns a list of widget classes (in alphabetical order) that are
         # set to enabled by the administrator in config tool.
         def portal_widget_enabled(input={}, raw=false)
-          response = get('mw/Portal.Widget.Enabled')
+          response = get('mw/Portal.Widget.Enabled', input, raw)
         end
 
         # Returns a list of 4 widget classes that are set to pinnned by the
