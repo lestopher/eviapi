@@ -1,7 +1,6 @@
 require 'faraday_middleware'
 
 module Eviapi
-  # @private
   module Connection
     private
 
@@ -17,6 +16,7 @@ module Eviapi
       Faraday::Connection.new(options) do |connection|
         connection.use Faraday::Request::UrlEncoded
         connection.use FaradayMiddleware::Mashify unless raw
+        connection.port = port
 
         unless raw
           case format.to_s.downcase
